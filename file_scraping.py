@@ -1,19 +1,25 @@
 import requests
 from bs4 import BeautifulSoup
+from time import sleep
 
-url = 'https://scrapingclub.com/exercise/list_basic/?page=1'
+headers = {"User-Agent":
+               "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.116 Safari/537.36"}
 
-response = requests.get(url)
+for count in range(1, 8):
+    sleep(3)
+    url = f'https://scrapingclub.com/exercise/list_basic/?page={count}'
 
-soup = BeautifulSoup(response.text, "lxml")
+    response = requests.get(url, headers='headers')
 
-data = soup.find_all('div', class_="col-lg-4 col-md-6 mb-4")  # find
+    soup = BeautifulSoup(response.text, "lxml")
 
-for i in data:
+    data = soup.find_all('div', class_="col-lg-4 col-md-6 mb-4")  # find
 
-    name = i.find('h4', class_="card-title").text.replace('\n', '')
-    price = i.find('h5').text
-    url_img = 'https://scrapingclub.com' + i.find('img', class_="card-img-top img-fluid").get("src")
+    for i in data:
 
-    if __name__ == '__main__':
-        print(name + '\n' + price + '\n' + url_img + '\n\n')
+        name = i.find('h4', class_="card-title").text.replace('\n', '')
+        price = i.find('h5').text
+        url_img = 'https://scrapingclub.com' + i.find('img', class_="card-img-top img-fluid").get("src")
+
+        if __name__ == '__main__':
+            print(name + '\n' + price + '\n' + url_img + '\n\n')
