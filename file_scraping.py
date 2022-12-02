@@ -22,15 +22,16 @@ def get_url():
             yield card_url
 
 
-for card_url in get_url():
-    response = requests.get(card_url, headers=headers)
-    sleep(3)
-    soup = BeautifulSoup(response.text, "lxml")
+def array():
+    for card_url in get_url():
+        response = requests.get(card_url, headers=headers)
+        sleep(3)
+        soup = BeautifulSoup(response.text, "lxml")
 
-    data = soup.find('div', class_="card mt-4 my-4")
+        data = soup.find('div', class_="card mt-4 my-4")
 
-    name = data.find('h3', class_="card-title").text
-    price = data.find('h4').text
-    text = data.find('p', class_="card-text").text
-    url_img = "https://scrapingclub.com" + data.find('img', class_="card-img-top img-fluid").get('src')
-    print(name + '\n' + price + '\n' + text + '\n' + url_img + '\n\n')
+        name = data.find('h3', class_="card-title").text
+        price = data.find('h4').text
+        text = data.find('p', class_="card-text").text
+        url_img = "https://scrapingclub.com" + data.find('img', class_="card-img-top img-fluid").get('src')
+        yield name, price, text, url_img
