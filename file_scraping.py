@@ -9,7 +9,7 @@ for count in range(1, 8):
     sleep(3)
     url = f'https://scrapingclub.com/exercise/list_basic/?page={count}'
 
-    response = requests.get(url, headers='headers')
+    response = requests.get(url, headers=headers)
 
     soup = BeautifulSoup(response.text, "lxml")
 
