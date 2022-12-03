@@ -3,7 +3,7 @@ from file_scraping import array
 
 
 def writer(parametr):
-    book = xlsxwriter.Workbook(r'C:\a_pet_projects\Web_scraping\data.xlsx')
+    book = xlsxwriter.Workbook(r'C:\Users\rusta\Desktop\data.xlsx')
     page = book.add_worksheet("товар")
 
     row = 0
